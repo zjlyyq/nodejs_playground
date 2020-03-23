@@ -8,7 +8,7 @@ const config = {
 
 const redis = new Redis(6379, "92.118.188.216");
 
-// redis.set("hostname",'localhost');
+redis.set("hostname","localhost");
 
 redis.get('hostname', (err, result) => {
     if (err) {
