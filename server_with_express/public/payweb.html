@@ -35,6 +35,9 @@
     <h5>在下方输入动态码原地址</h5>
     <form action="/transform" method="POST">
         <textarea type="text" id="url" name="url"></textarea><br>
+        <input type="radio" name="which" value="kf"/>开发
+        <input type="radio" name="which" value="ceshi"/>测试
+        <input type="radio" name="which" value="huigui"/>回归<br>
         <button type="submit" class="btn">转换</button>
     </form>
     

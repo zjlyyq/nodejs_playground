@@ -15,7 +15,14 @@ app.post("/transform", (req, res) => {
     let url = result.url;
     url = url.replace('https', "http")
     url = url.replace('pay', "tppdev")
-    url = url.replace('ifsp-payweb', "ifsp-payweb-ceshi")
+    if (result.which === "huigui") {
+        url = url.replace('ifsp-payweb', "ifsp-payweb-huigui")
+    }else if(result.which === "kf") {
+        url = url.replace('ifsp-payweb', "ifsp-payweb-kf")
+    }else {
+        url = url.replace('ifsp-payweb', "ifsp-payweb-ceshi")
+    }
+    
     res.redirect(url);
 });
 // app.get("/payweb", (req, res) => {
