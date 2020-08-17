@@ -5,6 +5,26 @@ const port = 3001;
 app.get("/", (req, res) => {
     res.send("Hello World!");
 });
+// app.get("/payweb", (req, res) => {
+//     express.static('../public')
+// });
+app.use(
+    "/payweb",
+    (req, res, next) => {
+        console.log('payweb')
+        console.log(path.resolve(__dirname, '../public'));
+        console.log([...path.resolve(__dirname + '../public')].map(e => e === '\\' ? '/':e).join(''))
+        res.header("Access-Control-Allow-Origin", "*"); //自定义中间件，设置跨域需要的响应头。
+        next();
+    },
+    // express.static("D:/CodeIsMyLife/react_playground")
+    // express.static('../react_playground')
+    
+    express.static(path.resolve(__dirname, '../public'))
+    // C:\Users\tl_zjl\Documents\MyCode\nodejs_playground\server_with_express\server\public
+    // C:/Users/tl_zjl/Documents/MyCode/nodejs_playground/server_with_express/server/public
+    // express.static('C:/Users/tl_zjl/Documents/MyCode/nodejs_playground/server_with_express/public')
+);
 app.use(
     "/react",
     (req, res, next) => {
