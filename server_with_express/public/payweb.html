@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>收银台动态码地址转换</title>
+    <style>
+        textarea {
+            width: 500px;
+            height: 400px;
+            background: pink;
+            border: 0;
+            caret-color: powderblue;
+            padding: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h5>请输入动态码原地址</h5>
+    <textarea type="text" id="url"></textarea><br>
+    <button type="submit" onclick="transofrm()">转换</button>
+
+    <script>
+        const transofrm = () => {
+            let urlDom = document.getElementById('url');
+            console.log(urlDom)
+            let url = "" + urlDom.value;
+            url = url.replace('https', "http")
+            url = url.replace('pay', "tppdev")
+            url = url.replace('ifsp-payweb', "ifsp-payweb-ceshi")
+            urlDom.value = url;
+        }
+    </script>
+</body>
+</html>
