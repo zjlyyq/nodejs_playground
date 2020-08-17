@@ -16,7 +16,7 @@ app.post("/transform", (req, res) => {
     url = url.replace('https', "http")
     url = url.replace('pay', "tppdev")
     url = url.replace('ifsp-payweb', "ifsp-payweb-ceshi")
-    res.send(url);
+    res.redirect(url);
 });
 // app.get("/payweb", (req, res) => {
 //     express.static('../public')
