@@ -33,11 +33,19 @@
 </head>
 <body>
     <h5>请输入动态码原地址</h5>
-    <textarea type="text" id="url"></textarea><br>
-    <button type="submit" onclick="transofrm()">转换</button>
+    <form action="/transform" method="POST">
+        <textarea type="text" id="url" name="url"></textarea><br>
+        <button type="submit" class="btn">转换</button>
+    </form>
+    
 
-    <script>
+    <script >
+        // import {ClipboardJS} from '../node_modules/clipboard/dist/clipboard.min.js'
+        // console.log(ClipboardJS)
         const transofrm = () => {
+
+            // alert(window.getSelection().getRangeAt(0));
+
             let urlDom = document.getElementById('url');
             console.log(urlDom)
             let url = "" + urlDom.value;
@@ -45,6 +53,15 @@
             url = url.replace('pay', "tppdev")
             url = url.replace('ifsp-payweb', "ifsp-payweb-ceshi")
             urlDom.value = url;
+            let xhr = new XMLHttpRequest();
+            xhr.open("post", "http://localhost:3001/transform")
+            xhr.setRequestHeader('Content-Type', 'text/json');
+            xhr.onload = function(res) {
+                console.log(res);
+            }
+            xhr.send(JSON.stringify({
+                text: url
+            }))
         }
     </script>
 </body>

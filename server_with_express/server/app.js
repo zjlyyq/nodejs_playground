@@ -2,8 +2,21 @@ const path = require('path');
 const express = require("express");
 const app = express();
 const port = 3001;
+const clipboard = require('clipboard');
+const boardParse = require('body-parser')
+// console.log(clipboard);
+app.use(boardParse.urlencoded({extends:true}));
 app.get("/", (req, res) => {
     res.send("Hello World!");
+});
+app.post("/transform", (req, res) => {
+    var result = req.body
+    // console.log()
+    let url = result.url;
+    url = url.replace('https', "http")
+    url = url.replace('pay', "tppdev")
+    url = url.replace('ifsp-payweb', "ifsp-payweb-ceshi")
+    res.send(url);
 });
 // app.get("/payweb", (req, res) => {
 //     express.static('../public')
@@ -12,7 +25,7 @@ app.use(
     "/payweb",
     (req, res, next) => {
         console.log('payweb')
-        console.log(path.resolve(__dirname, '../public'));
+        console.log(path.resolve(__dirname, '../'));
         console.log([...path.resolve(__dirname + '../public')].map(e => e === '\\' ? '/':e).join(''))
         res.header("Access-Control-Allow-Origin", "*"); //自定义中间件，设置跨域需要的响应头。
         next();
@@ -20,7 +33,7 @@ app.use(
     // express.static("D:/CodeIsMyLife/react_playground")
     // express.static('../react_playground')
     
-    express.static(path.resolve(__dirname, '../public'))
+    express.static(path.resolve(__dirname, '../'))
     // C:\Users\tl_zjl\Documents\MyCode\nodejs_playground\server_with_express\server\public
     // C:/Users/tl_zjl/Documents/MyCode/nodejs_playground/server_with_express/server/public
     // express.static('C:/Users/tl_zjl/Documents/MyCode/nodejs_playground/server_with_express/public')
