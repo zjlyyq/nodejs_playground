@@ -3,7 +3,8 @@ const express = require("express");
 const app = express();
 const port = 3001;
 const clipboard = require('clipboard');
-const boardParse = require('body-parser')
+const boardParse = require('body-parser');
+const { off } = require('process');
 // console.log(clipboard);
 app.use(boardParse.urlencoded({extends:true}));
 app.get("/", (req, res) => {
@@ -15,6 +16,11 @@ app.post("/transform", (req, res) => {
     let url = result.url;
     url = url.replace('https', "http")
     url = url.replace('pay', "tppdev")
+    // 小微
+    if (url.includes('billcloud')) {
+        let offset = url.split('qrCode')[1];
+        url = "http://tppdev.zjtlcb.com/ifsp-payweb/merUnionPayReceive?qrCode" + offset;
+    }
     if (result.which === "huigui") {
         url = url.replace('ifsp-payweb', "ifsp-payweb-huigui")
     }else if(result.which === "kf") {
