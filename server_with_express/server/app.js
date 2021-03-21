@@ -1,17 +1,69 @@
 const path = require('path');
+const fs = require('fs');
 const express = require("express");
 const app = express();
 const port = 3001;
 const clipboard = require('clipboard');
 const boardParse = require('body-parser');
 const { off } = require('process');
+const shajs = require('sha.js')
 // console.log(clipboard);
 app.use(boardParse.urlencoded({extends:true}));
 app.get("/", (req, res) => {
-    res.send("Hello World!");
+    // res.sendFile('C:/Users/tl_zjl/OneDrive/XMind/正则.xmind')
+    let hello = '123456';
+    hello = shajs('sha512').update(hello).digest('hex');
+    res.send(hello);
+    // res.send("Hello Express@");
+});
+app.get('/login', (req, res) => {
+    console.log(req.headers.authorization)
+    if (req.headers.authorization) {
+        const buffer = new Buffer('Tom:123456')
+        console.log(buffer.toString('base64'))
+        console.log(req.headers.authorization.split(' ')[1])
+        if (req.headers.authorization.split(' ')[1] === buffer.toString('base64')) {
+            // res.header({'Set-Cookie': 'id="Tom@123456"'})
+            res.header({'Set-Cookie': 'id="Tom@123456";age="1"'})
+            // res.header({'Set-Cookie': 'age="25"'})
+            res.send('Welcome, Tom!');
+            return
+        }
+    }
+    res.status(401);
+    res.header({'WWW-authenticate': 'Basic realm="Plumbing and Fixtures"'})
+    res.send('Login Require');
+})
+app.get('/login2', (req, res) => {
+    console.log(req.headers.authorization)
+    if (req.headers.authorization) {
+        const buffer = new Buffer('Tom:12345678')
+        console.log(buffer.toString('base64'))
+        console.log(req.headers.authorization.split(' ')[1])
+        if (req.headers.authorization.split(' ')[1] === buffer.toString('base64')) {
+            res.send('Welcome, Tom!');
+            return
+        }
+    }
+    res.status(401);
+    res.header({'WWW-authenticate': 'Basic realm="Plumbing and Fixtures"'})
+    res.send('Login Require');
+})
+app.get("/form_submit", (req, res) => {
+    res.send(`<h2>Hello ${formBody.name}, Get 表单提交成功</h2>`);
+});
+app.post("/form_submit", (req, res) => {
+    let formBody = req.body;
+    res.send(`<h2>Hello ${formBody.name}, Post 表单提交成功</h2>`);
+});
+app.put("addFile", (req, res) => {
+    // res.sendFile('C:/Users/tl_zjl/OneDrive/XMind/正则.xmind')
+    // fs.createWriteStream
+    // res.send("Hello Express@");
 });
 app.post("/transform", (req, res) => {
-    var result = req.body
+    console.log(req);
+    var result = req.body;
     // console.log()
     let url = result.url;
     url = url.replace('https', "http")
@@ -37,22 +89,62 @@ app.post("/transform", (req, res) => {
 app.use(
     "/payweb",
     (req, res, next) => {
-        console.log('payweb')
         console.log(path.resolve(__dirname, '../'));
-        console.log([...path.resolve(__dirname + '../public')].map(e => e === '\\' ? '/':e).join(''))
+        console.log([...path.resolve(__dirname,'../public')].map(e => e === '\\' ? '/':e).join(''))
+        res.header("Access-Control-Allow-Origin", "*"); //自定义中间件，设置跨域需要的响应头。
+        next();
+    },
+    express.static([...path.resolve(__dirname,'../public')].map(e => e === '\\' ? '/':e).join(''))
+);
+app.use(
+    "/worker",
+    (req, res, next) => {
+        console.log(path.resolve(__dirname, '../'));
+        console.log([...path.resolve(__dirname,'../../../JavaScript/JavaScriptForWebDevelop/worker/')].map(e => e === '\\' ? '/':e).join(''))
+        res.header("Access-Control-Allow-Origin", "*"); //自定义中间件，设置跨域需要的响应头。
+        next();
+    },
+    express.static([...path.resolve(__dirname,'../../../JavaScript/JavaScriptForWebDevelop/worker/')].map(e => e === '\\' ? '/':e).join(''))
+);
+app.use(
+    "/bangbang",
+    (req, res, next) => {
+        res.header("Access-Control-Allow-Origin", "*"); //自定义中间件，设置跨域需要的响应头。
+        next();
+    },
+    express.static("C:/Users/tl_zjl/Documents/TL_CODE/dev-branch/2020/10/PHCS2020-002964泰惠收客户端金融备案检测问题整改/safekeyboard")
+);
+app.use(
+    "/safekeyboard",
+    (req, res, next) => {
+        res.header("Access-Control-Allow-Origin", "*"); //自定义中间件，设置跨域需要的响应头。
+        next();
+    },
+    express.static("C:/Users/tl_zjl/Documents/TL_CODE/dev-branch/2020/10/PHCS2020-002964泰惠收客户端金融备案检测问题整改/safekeyboard")
+);
+app.use(
+    "/face",
+    (req, res, next) => {
+        console.log('face')
         res.header("Access-Control-Allow-Origin", "*"); //自定义中间件，设置跨域需要的响应头。
         next();
     },
     // express.static("D:/CodeIsMyLife/react_playground")
     // express.static('../react_playground')
-    
-    express.static(path.resolve(__dirname, '../'))
-    // C:\Users\tl_zjl\Documents\MyCode\nodejs_playground\server_with_express\server\public
-    // C:/Users/tl_zjl/Documents/MyCode/nodejs_playground/server_with_express/server/public
-    // express.static('C:/Users/tl_zjl/Documents/MyCode/nodejs_playground/server_with_express/public')
+    express.static('C:/Users/tl_zjl/Documents/MyCode/JavaScript/MediaStream')
 );
 app.use(
     "/react",
+    (req, res, next) => {
+        res.header("Access-Control-Allow-Origin", "*"); //自定义中间件，设置跨域需要的响应头。
+        next();
+    },
+    // express.static("D:/CodeIsMyLife/react_playground")
+    // express.static('../react_playground')
+    express.static('C:/Users/zjl/Documents/mycode/react_playground')
+);
+app.use(
+    "/blacboard",
     (req, res, next) => {
         res.header("Access-Control-Allow-Origin", "*"); //自定义中间件，设置跨域需要的响应头。
         next();
@@ -68,8 +160,9 @@ app.use(
         next();
     },
     // express.static("D:/CodeIsMyLife/react_playground")
-    // express.static('../react_playground')
-    express.static('/media/zjlyyq/AC0CDF290CDEED78/Users/tl_zjl/Documents/TL_CODE/dev-branch/多收多贷需求RCXQ2020-110001')
+    // express.static('../react_playground')C:
+    // 'C:\Users\tl_zjl\Documents\TL_CODE\dev-branch\2020\09\20200828_享贷商户RCXQ2020-167504'
+    express.static('C:/Users/tl_zjl/Documents/TL_CODE/dev-branch/2020/09/20200828_享贷商户RCXQ2020-167504/wallet')
 );
 app.use(
     "/es_basic",
