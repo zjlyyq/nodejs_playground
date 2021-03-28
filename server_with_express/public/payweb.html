@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>收银台动态码地址(小微静态码)转换</title>
+    <style>
+        body {
+            text-align: center;
+            margin: 0;
+        }
+        textarea {
+            margin: 0 auto;
+            width: 80%;
+            height: 200px;
+            background: pink;
+            border: 0;
+            caret-color: rgb(59, 61, 61);
+            padding: 12px;
+        }
+
+        button[type='submit'] {
+            width: auto;
+            border: 0;
+            padding: 10px 18px;
+            border-radius: 10%;
+            margin: 20px 0;
+        }
+        button:focus {
+            border: 1px solid powderblue ;
+        }
+    </style>
+</head>
+<body>
+    <h5>在下方输入动态码原地址或小微商户收款码原地址后选择环境后点转换</h5>
+    <form action="/transform" method="POST">
+        <textarea type="text" id="url" name="url"></textarea><br>
+        <input type="radio" name="which" value="kf"/>开发
+        <input type="radio" name="which" value="ceshi"/>测试
+        <input type="radio" name="which" value="huigui"/>回归<br>
+        <button type="submit" class="btn">转换</button>
+    </form>
+    
+
+    <script >
+        // import {ClipboardJS} from '../node_modules/clipboard/dist/clipboard.min.js'
+        // console.log(ClipboardJS)
+        const transofrm = () => {
+            // alert(window.getSelection().getRangeAt(0));
+            let urlDom = document.getElementById('url');
+            console.log(urlDom)
+            let url = "" + urlDom.value;
+            url = url.replace('https', "http")
+            url = url.replace('pay', "tppdev")
+            url = url.replace('ifsp-payweb', "ifsp-payweb-ceshi")
+            urlDom.value = url;
+            let xhr = new XMLHttpRequest();
+            xhr.open("post", "http://localhost:3001/transform")
+            xhr.setRequestHeader('Content-Type', 'text/json');
+            xhr.onload = function(res) {
+                console.log(res);
+            }
+            xhr.send(JSON.stringify({
+                text: url
+            }))
+        }
+    </script>
+</body>
+</html>
