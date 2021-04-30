@@ -17,6 +17,10 @@ app.get("/", (req, res) => {
     res.send(hello);
     // res.send("Hello Express@");
 });
+app.get("/beacon", (req, res) => {
+    res.status(204);
+    res.send('No Content');
+});
 app.get('/login', (req, res) => {
     console.log(req.headers.authorization)
     if (req.headers.authorization) {
@@ -139,8 +143,8 @@ app.use(
         next();
     },
     // express.static("D:/CodeIsMyLife/react_playground")
-    // express.static('../react_playground')
-    express.static('C:/Users/zjl/Documents/mycode/react_playground')
+    express.static('/Users/jialuzhang/MyCode/react_playground')
+    // express.static('C:/Users/zjl/Documents/mycode/react_playground')
 );
 app.use(
     "/blacboard",
@@ -181,6 +185,12 @@ app.use("/root",
 },
 express.static("public"));
 
+
+app.get("/videoList", 
+(req, res) => {
+    res.header("Access-Control-Allow-Origin", "*"); //自定义中间件，设置跨域需要的响应头。
+    res.send('viedeoList');
+});
 // app.use(function(req, res, next) {
 //     res.status(404).send("Sorry can't find that!");
 // });
