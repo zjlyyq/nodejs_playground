@@ -7,6 +7,7 @@ const clipboard = require('clipboard');
 const boardParse = require('body-parser');
 const { off } = require('process');
 const shajs = require('sha.js')
+const { generatorUnipayweb, new_generatorUnipayweb } = require('./ifsp_unipayweb')
 // console.log(clipboard);
 app.use(boardParse.urlencoded({extends:true}));
 app.get("/", (req, res) => {
@@ -64,7 +65,6 @@ app.put("addFile", (req, res) => {
 app.post("/transform", (req, res) => {
     console.log(req);
     var result = req.body;
-    // console.log()
     let url = result.url;
     url = url.replace('https', "http")
     url = url.replace('pay', "tppdev")
@@ -80,7 +80,6 @@ app.post("/transform", (req, res) => {
     }else {
         url = url.replace('ifsp-payweb', "ifsp-payweb-ceshi")
     }
-    
     res.redirect(url);
 });
 // app.get("/payweb", (req, res) => {
@@ -190,6 +189,25 @@ app.use(function(err, req, res, next) {
     console.error(err.stack);
     res.status(500).send("Something broke!");
 });
+
+app.use('/redirect_unipayweb', async function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*"); //自定义中间件，设置跨域需要的响应头。
+    url = await generatorUnipayweb()
+    res.redirect(url)
+},)
+
+app.use('/redirect_unipayweb', async function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*"); //自定义中间件，设置跨域需要的响应头。
+    url = await generatorUnipayweb()
+    res.redirect(url)
+},)
+
+app.use('/newgeneration', async function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*"); //自定义中间件，设置跨域需要的响应头。
+    url = await new_generatorUnipayweb()
+    console.log(url)
+    res.redirect(url)
+},)
 
 app.listen(port, () => {
     console.log(`Example start in port ${port}!`);
