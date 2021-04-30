@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Draft//EN">\n<HTML>\n
+
+<HEAD>\n<TITLE>Error 500--Internal Server Error</TITLE>\n</HEAD>\n
+
+<BODY bgcolor="white">\n<FONT FACE=Helvetica><BR CLEAR=all>\n<TABLE border=0 cellspacin g=5>
+            <TR>
+                <TD><BR CLEAR=all>\n<FONT FACE="Helvetica" COLOR="black" SIZE="3">
+                        <H2>Error 500--Internal Server Error</H2>\n
+                    </FONT>
+                </TD>
+            </TR>\n
+        </TABLE>\n<TABLE border=0 width=100% cellpadding=10>
+            <TR>
+                <TD VALIGN=top WIDTH=100% BGCOLOR=white>
+                    <FONT FACE="Courier New">
+                        <pre>org.springframework.beans.BeanInstantiationException: Failed to instantiate [void]: Is it an abstract class?&#59; nested exception is java.lang.InstantiationException: void\n\tat org.sprin
+    gframework.beans.BeanUtils.instantiate(BeanUtils.java:80)\n\tat com.ruim.ifsp.aop.BaseAspect.getResultBean(BaseAspect.java:47)\n\tat com.ruim.ifsp.exception.aop.ExceptionAspect.roundException(ExceptionAspect.java:77)\n\tat su
+    n.reflect.GeneratedMethodAccessor240.invoke(Unknown Source)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat org.springfr
+    amework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:629)\n\tat org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:618)\n\tat or
+    g.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:70)\n\tat org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:168)\n\tat org.springframework.a
+    op.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:92)\n\tat org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)\n\tat org.springframework.
+    aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:655)\n\tat com.ruim.ifsp.mchtappl.controller.ESBController$$EnhancerBySpringCGLIB$$755143e2.getMethodByESB(<generated>)\n\tat sun.reflect.Gene
+    ratedMethodAccessor239.invoke(Unknown Source)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat org.springframework.web.me
+    thod.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:221)\n\tat org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:136)\n\tat org.springframework.web
+    .servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:114)\n\tat org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod
+    (RequestMappingHandlerAdapter.java:827)\n\tat org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:738)\n\tat org.springframework.web.servlet.mvc.
+    method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:85)\n\tat org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)\n\tat org.springframework.web.servlet.DispatcherS
+    ervlet.doService(DispatcherServlet.java:897)\n\tat org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:970)\n\tat org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java
+    :872)\n\tat javax.servlet.http.HttpServlet.service(HttpServlet.java:707)\n\tat org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:846)\n\tat javax.servlet.http.HttpServlet.service(HttpServlet.java:
+    790)\n\tat weblogic.servlet.internal.StubSecurityHelper$ServletServiceAction.run(StubSecurityHelper.java:286)\n\tat weblogic.servlet.internal.StubSecurityHelper$ServletServiceAction.run(StubSecurityHelper.java:260)\n\tat webl
+    ogic.servlet.internal.StubSecurityHelper.invokeServlet(StubSecurityHelper.java:137)\n\tat weblogic.servlet.internal.ServletStubImpl.execute(ServletStubImpl.java:350)\n\tat weblogic.servlet.internal.TailFilter.doFilter(TailFil
+    ter.java:25)\n\tat weblogic.servlet.internal.FilterChainImpl.doFilter(FilterChainImpl.java:78)\n\tat com.ruim.ifsp.web.filter.IfspHttpEncodingFilter.doFilter(IfspHttpEncodingFilter.java:56)\n\tat weblogic.servlet.internal.Fil
+    terChainImpl.doFilter(FilterChainImpl.java:78)\n\tat org.apache.logging.log4j.web.Log4jServletFilter.doFilter(Log4jServletFilter.java:71)\n\tat weblogic.servlet.internal.FilterChainImpl.doFilter(FilterChainImpl.java:78)\n\tat
+     weblogic.servlet.internal.WebAppServletContext$ServletInvocationAction.wrapRun(WebAppServletContext.java:3683)\n\tat weblogic.servlet.internal.WebAppServletContext$ServletInvocationAction.run(WebAppServletContext.java:3649)\
+    n\tat weblogic.security.acl.internal.AuthenticatedSubject.doAs(AuthenticatedSubject.java:326)\n\tat weblogic.security.service.SecurityManager.runAsForUserCode(SecurityManager.java:197)\n\tat weblogic.servlet.provider.WlsSecur
+    ityProvider.runAsForUserCode(WlsSecurityProvider.java:203)\n\tat weblogic.servlet.provider.WlsSubjectHandle.run(WlsSubjectHandle.java:71)\n\tat weblogic.servlet.internal.WebAppServletContext.doSecuredExecute(WebAppServletCont
+    ext.java:2433)\n\tat weblogic.servlet.internal.WebAppServletContext.securedExecute(WebAppServletContext.java:2281)\n\tat weblogic.servlet.internal.WebAppServletContext.execute(WebAppServletContext.java:2259)\n\tat weblogic.se
+    rvlet.internal.ServletRequestImpl.runInternal(ServletRequestImpl.java:1692)\n\tat weblogic.servlet.internal.ServletRequestImpl.run(ServletRequestImpl.java:1652)\n\tat weblogic.servlet.provider.ContainerSupportProviderImpl$Wls
+    RequestExecutor.run(ContainerSupportProviderImpl.java:272)\n\tat weblogic.invocation.ComponentInvocationContextManager._runAs(ComponentInvocationContextManager.java:348)\n\tat weblogic.invocation.ComponentInvocationContextMan
+    ager.runAs(ComponentInvocationContextManager.java:333)\n\tat weblogic.work.LivePartitionUtility.doRunWorkUnderContext(LivePartitionUtility.java:54)\n\tat weblogic.work.PartitionUtility.runWorkUnderContext(PartitionUtility.jav
+    a:41)\n\tat weblogic.work.SelfTuningWorkManagerImpl.runWorkUnderContext(SelfTuningWorkManagerImpl.java:640)\n\tat weblogic.work.ExecuteThread.execute(ExecuteThread.java:406)\n\tat weblogic.work.ExecuteThread.run(ExecuteThread
+    .java:346)\nCaused by: java.lang.InstantiationException: void\n\tat java.lang.Class.newInstance(Class.java:427)\n\tat org.springframework.beans.BeanUtils.instantiate(BeanUtils.java:77)\n\t... 58 more\nCaused by: java.lang.NoS
+    uchMethodException: void.&lt;init&gt;&#40;&#41;\n\tat java.lang.Class.getConstructor0(Class.java:3082)\n\tat java.lang.Class.newInstance(Class.java:412)\n\t... 59 more\n</pre>
+                    </FONT>
+                </TD>
+            </TR>\n
+        </TABLE>\n\n</BODY>\n
+
+</HTML>\n'
